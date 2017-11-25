@@ -62,9 +62,41 @@ int main()
 	outtextxy(WIDTH / 2, HEIGHT / 2, _T("按Y开始游戏,其他键退出..."));
 	c = _getch();
 	//难度级别选择
-	int speed;
-	outtextxy(WIDTH / 2, HEIGHT / 2, _T("请选择1-10级难度"));
-
+	int speed, in;
+	outtextxy(WIDTH / 2, HEIGHT / 2, _T("请选择1-8级难度"));
+	errors:
+	scanf("%d", &in);
+	switch (in)
+	{
+	case 1:
+		speed = 300;
+		break;
+	case 2:
+		speed = 200;
+		break;
+	case 3:
+		speed = 100;
+		break;
+	case 4:
+		speed = 70;
+		break;
+	case 5:
+		speed = 50;
+		break;
+	case 6:
+		speed = 25;
+		break;
+	case 7:
+		speed = 20;
+		break;
+	case 8:
+		speed = 10;
+		break;
+	default:
+		outtextxy(WIDTH / 2, HEIGHT / 2, _T("输入有误，请重新输入"));
+		goto errors;
+		break;
+	}
 	while (c == 'y' || c == 'Y')
 	{
 		//运行
