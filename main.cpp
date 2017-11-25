@@ -16,7 +16,6 @@
 #define SNAKER  12				//蛇块半径
 #define FOODR 15				//食物半径
 #define SNAKELEN  1024			//蛇的最大长度
-#define SPEED 80				//游戏速度
 
 //位置结构体
 struct Pos
@@ -40,7 +39,7 @@ void updateFoodPos();//更新食物位置
 void displaySnake();//画蛇
 void displayFood();//画食物
 void updateSnake();//更新蛇的位置和长度
-void run();//运行
+void run(int speed);//运行
 void keyOperator();//判断键位并改变方向
 bool isImpact();//判断是否碰撞
 bool isEat();//判断是否吃到食物
@@ -61,11 +60,15 @@ int main()
 	char c;
 	//显示字体
 	outtextxy(WIDTH / 2, HEIGHT / 2, _T("按Y开始游戏,其他键退出..."));
-	c = getch();
+	c = _getch();
+	//难度级别选择
+	int speed;
+	outtextxy(WIDTH / 2, HEIGHT / 2, _T("请选择1-10级难度"));
+
 	while (c == 'y' || c == 'Y')
 	{
 		//运行
-		run();
+		run(speed);
 		outtextxy(WIDTH / 2, HEIGHT / 2, _T("失败！！！按Y开始游戏,其他键退出..."));
 		_getch();
 	}
@@ -141,7 +144,7 @@ void updateSnake()
 	}
 }
 
-void run()
+void run(int speed)
 {
 	init();
 	while (1)
@@ -153,7 +156,7 @@ void run()
 		updateSnake();//改变蛇位置
 		if (isImpact())//碰撞检测
 			return;
-		Sleep(SPEED);
+		Sleep(speed);
 	}
 }
 
